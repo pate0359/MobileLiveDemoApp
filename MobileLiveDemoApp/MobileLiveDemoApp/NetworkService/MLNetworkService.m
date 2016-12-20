@@ -8,10 +8,11 @@
 
 #import "MLNetworkService.h"
 
-
 @interface MLNetworkService ()
 {
     AFHTTPSessionManager *manager;
+    AFNetworkReachabilityManager *managerServerReachability;
+    BOOL serverReachabilityStatusReceived;
 }
 @end
 
@@ -19,6 +20,7 @@
 
 #define BASE_URL @"http://mobilelive.getsandbox.com"
 
+#pragma mark - Initialization
 +(MLNetworkService *) sharedInstance
 {
     static MLNetworkService *sharedInstance = nil;
@@ -33,11 +35,38 @@
 {
     self = [super init];
     if (self) {
-        self->manager = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+        self->manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+        
+        //Defining Reachability manager for Server
+        serverReachabilityStatusReceived = NO;
+        AFNetworkReachabilityManager *reachabilityMgr = [AFNetworkReachabilityManager managerForDomain:[NSString stringWithFormat:@"%@",@"mobilelive.getsandbox.com"]];
+        [reachabilityMgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            
+            serverReachabilityStatusReceived = YES;
+            NSLog(@"%@",AFStringFromNetworkReachabilityStatus(status));
+        }];
+        self->managerServerReachability =  reachabilityMgr;
+        [reachabilityMgr startMonitoring];
     }
     return self;
 }
 
+#pragma mark - Rechability methods
+-(NSError *) checkServerReachability
+{
+    //Assume server is reachable until Reachability status has been received
+    if (!serverReachabilityStatusReceived) {
+        return nil;
+    }
+    
+    if (managerServerReachability.reachableViaWiFi || managerServerReachability.reachableViaWWAN) {
+        return nil;
+    }else {
+        return [self errObjectWithMsg:@"Server not reachable"];
+    }
+}
+
+#pragma mark - Helper methods
 
 -(NSError *) errObjectWithMsg:(NSString *) msg
 {
@@ -46,13 +75,25 @@
     return err;
 }
 
-NSString *postUrl(NSString *url)
+NSString *requestUrl(NSString *url)
 {
     return [NSString stringWithFormat:@"%@/%@",BASE_URL,url];
 }
 
--(void) registerUser:(NSDictionary *) params responseBlock:(void (^)(NSDictionary *userDetails,NSError *err)) finishBlock{
+- (NSString *)encodeToBase64String:(UIImage *)image {
     
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+- (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
+
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options: NSDataBase64DecodingIgnoreUnknownCharacters];
+    return [UIImage imageWithData:data];
+}
+
+#pragma mark - Networkcall
+
+-(void) registerUser:(NSDictionary *) params responseBlock:(void (^)(NSDictionary *userDetails,NSError *err)) finishBlock{
     
     NSMutableDictionary *userDetails=[NSMutableDictionary new];
     
@@ -65,30 +106,27 @@ NSString *postUrl(NSString *url)
         }
     };    
     
-    //Network Reachability
-    if(![[AFNetworkReachabilityManager sharedManager] isReachable]) {
-        
-        NSError *error = [self errObjectWithMsg:@"Network not rechable."];
-        fBlock(error);
+    //Server Reachability
+    NSError *reachabilityErr = [self checkServerReachability];
+    if (reachabilityErr) {
+        fBlock(reachabilityErr);
         return;
     }
     
-    [manager POST:postUrl(@"users") parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [manager POST:requestUrl(@"users") parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        //Check for error
-        NSDictionary *dictError=[responseObject objectForKey:@"error"];
-        if (dictError) {
+        //Get session-id from HTTP response headers
+        if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
             
-            NSString *msg = nil;
-            if (!dictError[@"message"]) {
-                msg = dictError[@"message"];
-            }else{
-                msg = @"Invalid response from server.";
-            }
+            NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
+            NSLog(@"allHeaderFields - %@" ,[r allHeaderFields]);
             
-            NSError *err = [self errObjectWithMsg:msg];
-            fBlock(err);
-            return;
+            NSString *coockie = [[r allHeaderFields] valueForKey:@"Set-Cookie"];
+            [[NSUserDefaults standardUserDefaults] setObject:coockie forKey:@"Set-Cookie"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
         
         userDetails[@"id"] = [NSString stringWithFormat:@"%@",responseObject[@"id"]];
@@ -107,6 +145,7 @@ NSString *postUrl(NSString *url)
         
         fBlock(error);
     }];
+    
 }
 
 -(void) loginwithUserName:(NSString *) username password:(NSString*)password responseBlock:(void (^)(NSDictionary *userDetails,NSError *err)) finishBlock{
@@ -122,34 +161,32 @@ NSString *postUrl(NSString *url)
         }
     };
     
-    //Network Reachability
-    if(![[AFNetworkReachabilityManager sharedManager] isReachable]) {
-        
-        NSError *error = [self errObjectWithMsg:@"Network not rechable."];
-        fBlock(error);
+    ///Server Reachability
+    NSError *reachabilityErr = [self checkServerReachability];
+    if (reachabilityErr) {
+        fBlock(reachabilityErr);
         return;
     }
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSDictionary *params = @{@"username": username,
                             @"password": password
                              };
     
-    [manager POST:postUrl(@"users") parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:requestUrl(@"users/login") parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        //Check for error
-        NSDictionary *dictError=[responseObject objectForKey:@"error"];
-        if (dictError) {
+        //Get session-id from HTTP response headers
+        if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
             
-            NSString *msg = nil;
-            if (!dictError[@"message"]) {
-                msg = dictError[@"message"];
-            }else{
-                msg = @"Invalid response from server.";
-            }
+            NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
+            NSLog(@"allHeaderFields - %@" ,[r allHeaderFields]);
             
-            NSError *err = [self errObjectWithMsg:msg];
-            fBlock(err);
-            return;
+            NSString *coockie = [[r allHeaderFields] valueForKey:@"Set-Cookie"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:coockie forKey:@"Set-Cookie"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
         
         userDetails[@"id"] = [NSString stringWithFormat:@"%@",responseObject[@"id"]];
@@ -163,6 +200,96 @@ NSString *postUrl(NSString *url)
         
         fBlock(nil);
         
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"Set-Cookie"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        fBlock(error);
+    }];
+}
+
+-(void) uploadPhoto:(UIImage *) photo withName:(NSString*)name responseBlock:(void (^)(BOOL isSuccess,NSError *err)) finishBlock{
+ 
+    //NSMutableDictionary *userDetails=[NSMutableDictionary new];
+    __block BOOL isSuccess = NO;
+    
+    //Setting up finish block
+    void (^fBlock)(NSError *err) = ^(NSError *err){
+        if (err) { //Failed
+            finishBlock(isSuccess,err);
+        }else { //Success
+            finishBlock(isSuccess,nil);
+        }
+    };
+    
+    ///Server Reachability
+    NSError *reachabilityErr = [self checkServerReachability];
+    if (reachabilityErr) {
+        fBlock(reachabilityErr);
+        return;
+    }
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"]){
+        
+        [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"] forHTTPHeaderField:@"cookie"];
+    }
+    
+    NSString *strImage = [self encodeToBase64String:photo];
+    NSDictionary *params = @{@"name": name,
+                             @"data": strImage
+                             };
+    
+    [manager POST:requestUrl(@"v2/photos") parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        isSuccess = YES;
+        fBlock(nil);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        isSuccess = NO;
+        fBlock(error);
+    }];
+}
+
+-(void) getListOfPhotos:(void (^)(NSDictionary *response,NSError *err)) finishBlock{
+    
+    __block NSDictionary *response=[NSDictionary new];
+    
+    //Setting up finish block
+    void (^fBlock)(NSError *err) = ^(NSError *err){
+        if (err) { //Failed
+            finishBlock(response,err);
+        }else { //Success
+            finishBlock(response,nil);
+        }
+    };
+    
+    //Server Reachability
+    NSError *reachabilityErr = [self checkServerReachability];
+    if (reachabilityErr) {
+        fBlock(reachabilityErr);
+        return;
+    }
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    //NSLog(@"coockies - %@" ,[[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"]);
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"]){
+    
+        [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"] forHTTPHeaderField:@"cookie"];
+    }
+    
+    [manager GET:requestUrl(@"v2/photos") parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            response =  (NSDictionary*) responseObject;
+            fBlock(nil);
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -170,16 +297,47 @@ NSString *postUrl(NSString *url)
     }];
 }
 
--(void) uploadPhoto:(UIImage *) photo withName:(NSString*)name responseBlock:(void (^)(BOOL isSuccess,NSError *err)) finishBlock{
+-(void) getPhotoWithId:(NSString *) photoId responseBlock:(void (^)(NSDictionary *photo,NSError *err)) finishBlock{
     
-}
+    __block NSDictionary *response=[NSDictionary new];
+    
+    //Setting up finish block
+    void (^fBlock)(NSError *err) = ^(NSError *err){
+        if (err) { //Failed
+            finishBlock(response,err);
+        }else { //Success
+            finishBlock(response,nil);
+        }
+    };
+    
+    //Server Reachability
+    NSError *reachabilityErr = [self checkServerReachability];
+    if (reachabilityErr) {
+        fBlock(reachabilityErr);
+        return;
+    }
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    //NSLog(@"coockies - %@" ,[[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"]);
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"]){
+        
+        [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"Set-Cookie"] forHTTPHeaderField:@"cookie"];
+    }
+    
+    [manager GET:requestUrl([NSString stringWithFormat:@"v2/photos/%@",photoId]) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
--(void) getListOfPhotos:(void (^)(NSArray *photos,NSError *err)) finishBlock{
-    
-}
-
--(void) getPhotoWithId:(NSString *) photoId responseBlock:(void (^)(UIImage *image,NSError *err)) finishBlock{
-    
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            response =  (NSDictionary*) responseObject;
+            fBlock(nil);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        fBlock(error);
+    }];
 }
 
 @end

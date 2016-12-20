@@ -33,6 +33,7 @@
 		10FA2F871E09AF3C006085A7 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FA2F741E09AF3C006085A7 /* UIProgressView+AFNetworking.m */; };
 		10FA2F881E09AF3C006085A7 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FA2F761E09AF3C006085A7 /* UIRefreshControl+AFNetworking.m */; };
 		10FA2F891E09AF3C006085A7 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FA2F781E09AF3C006085A7 /* UIWebView+AFNetworking.m */; };
+		10FA2F8B1E09C20F006085A7 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 10FA2F8A1E09C20F006085A7 /* test.jpg */; };
 		AA3DCD6CE215EE1F25C36592 /* libPods-MobileLiveDemoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F05FCF839CF5CCB5C980F38 /* libPods-MobileLiveDemoApp.a */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		10FA2F761E09AF3C006085A7 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		10FA2F771E09AF3C006085A7 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		10FA2F781E09AF3C006085A7 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		10FA2F8A1E09C20F006085A7 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		29018DFAEFEDD643A3207E71 /* Pods-MobileLiveDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileLiveDemoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MobileLiveDemoApp/Pods-MobileLiveDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		8F05FCF839CF5CCB5C980F38 /* libPods-MobileLiveDemoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MobileLiveDemoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2236527DD2466265092D89D /* Pods-MobileLiveDemoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileLiveDemoAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MobileLiveDemoAppTests/Pods-MobileLiveDemoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		10BC17EF1E09812D008DF7A6 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				10FA2F8A1E09C20F006085A7 /* test.jpg */,
 				10BC17F01E09812D008DF7A6 /* MLNetworkService.h */,
 				10BC17F11E09812D008DF7A6 /* MLNetworkService.m */,
 			);
@@ -366,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10BC17D71E0973E6008DF7A6 /* LaunchScreen.storyboard in Resources */,
+				10FA2F8B1E09C20F006085A7 /* test.jpg in Resources */,
 				10BC17D41E0973E6008DF7A6 /* Assets.xcassets in Resources */,
 				10FA2F7F1E09AF3C006085A7 /* LICENSE in Resources */,
 				10BC17D21E0973E5008DF7A6 /* Main.storyboard in Resources */,
