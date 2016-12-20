@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MLNetworkService.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [[MLNetworkService sharedInstance] loginwithUserName:@"User1" password:@"User2" responseBlock:^(NSDictionary *userDetails, NSError *err) {
+        
+        NSLog(@"userDetails : %@",userDetails);
+        NSLog(@"err : %@",err);
+        
+    }];
 }
 
 

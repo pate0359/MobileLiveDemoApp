@@ -4,20 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MobileLiveDemoApp.xcscheme</key>
+		<key>Pods-MobileLiveDemoApp.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MobileLiveDemoAppTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>10BC17C31E0973E5008DF7A6</key>
+		<key>31ECDB3742E61B6E7FE046BC234FA316</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>10BC17DC1E0973E6008DF7A6</key>
+		<key>9200CF137A96678100C053599CFEEE88</key>
 		<dict>
 			<key>primary</key>
 			<true/>
