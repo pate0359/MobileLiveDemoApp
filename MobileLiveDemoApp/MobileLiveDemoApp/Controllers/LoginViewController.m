@@ -7,10 +7,11 @@
 //
 
 #import "LoginViewController.h"
+#import "MLNetworkService.h"
 
-@interface LoginViewController ()
-@property (strong, nonatomic) IBOutlet UITextField *lblUsername;
-@property (strong, nonatomic) IBOutlet UITextField *lblPassword;
+@interface LoginViewController () <UITextFieldDelegate>
+@property (strong, nonatomic) IBOutlet UITextField *txtUsername;
+@property (strong, nonatomic) IBOutlet UITextField *txtPassword;
 
 @end
 
@@ -19,15 +20,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+#pragma mark - Action Methods
+
 - (IBAction)btnSignInClicked:(id)sender {
+    
+    if (![self.txtUsername.text isEqualToString:@""] && ![self.txtPassword.text isEqualToString:@""]) {
+        
+        [[MLNetworkService sharedInstance] loginwithUserName:self.txtUsername.text password:self.txtPassword.text responseBlock:^(NSDictionary *userDetails, NSError *err) {
+            
+            NSLog(@"userDetails : %@",userDetails);
+            NSLog(@"err : %@",err);
+            if (err) {
+                
+                return;
+            }
+            
+            [self performSegueWithIdentifier:@"ListView" sender:self];
+            
+        }];
+    }
+}
+
+#pragma mark - UITextField Methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
 }
 
 /*

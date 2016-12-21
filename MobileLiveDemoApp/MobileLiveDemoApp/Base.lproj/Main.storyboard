@@ -95,8 +95,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="863-Zf-FZ1"/>
                     <connections>
-                        <outlet property="lblPassword" destination="FMF-GZ-EwR" id="KJB-ed-Skr"/>
-                        <outlet property="lblUsername" destination="1wD-sR-rf5" id="CTD-Ls-tlh"/>
+                        <outlet property="txtPassword" destination="FMF-GZ-EwR" id="e5y-77-bJe"/>
+                        <outlet property="txtUsername" destination="1wD-sR-rf5" id="Vdy-gd-jyj"/>
                         <segue destination="3ym-0Z-78a" kind="show" identifier="ListView" id="av0-KT-CgY"/>
                     </connections>
                 </viewController>
@@ -118,6 +118,25 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IiV-YX-rmC">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellPhotoListID" textLabel="wyH-R8-3jU" style="IBUITableViewCellStyleDefault" id="OAW-2m-dAW">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAW-2m-dAW" id="pmQ-J4-t06">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wyH-R8-3jU">
+                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="3ym-0Z-78a" id="ce7-S1-4R4"/>
                                     <outlet property="delegate" destination="3ym-0Z-78a" id="jVy-35-iSz"/>
@@ -155,6 +174,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-jQ-HGj">
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PSE-jQ-HGj" secondAttribute="height" multiplier="339:271" id="IsQ-G8-i83"/>
                                 </constraints>
@@ -317,11 +337,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="lblFirstname" destination="PRf-rs-8ZU" id="DLl-Sr-J6c"/>
-                        <outlet property="lblLastname" destination="ZXj-gr-0wh" id="zgt-YC-5wO"/>
-                        <outlet property="lblPassword" destination="82e-u9-3pM" id="pwn-px-avf"/>
-                        <outlet property="lblPhone" destination="iEF-yS-zAl" id="Vmv-mW-whI"/>
-                        <outlet property="lblUsername" destination="Y5z-Td-VGX" id="It3-aG-rM5"/>
+                        <outlet property="txtFirstname" destination="PRf-rs-8ZU" id="yN6-Yx-ldu"/>
+                        <outlet property="txtLastname" destination="ZXj-gr-0wh" id="FhW-e7-NUi"/>
+                        <outlet property="txtPassword" destination="82e-u9-3pM" id="6XU-1o-2CO"/>
+                        <outlet property="txtPhone" destination="iEF-yS-zAl" id="TYd-sd-o9v"/>
+                        <outlet property="txtUsername" destination="Y5z-Td-VGX" id="moq-Hh-DrP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="md0-p3-hdE" userLabel="First Responder" sceneMemberID="firstResponder"/>

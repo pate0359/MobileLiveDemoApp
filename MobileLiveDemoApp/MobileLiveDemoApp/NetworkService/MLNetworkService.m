@@ -85,12 +85,6 @@ NSString *requestUrl(NSString *url)
     return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
-- (UIImage *)decodeBase64ToImage:(NSString *)strEncodeData {
-
-    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options: NSDataBase64DecodingIgnoreUnknownCharacters];
-    return [UIImage imageWithData:data];
-}
-
 #pragma mark - Networkcall
 
 -(void) registerUser:(NSDictionary *) params responseBlock:(void (^)(NSDictionary *userDetails,NSError *err)) finishBlock{
