@@ -38,18 +38,36 @@
     
     if (![self.txtUsername.text isEqualToString:@""] && ![self.txtPassword.text isEqualToString:@""]) {
         
+        //Show network indicator on statusbar
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
         [[MLNetworkService sharedInstance] loginwithUserName:self.txtUsername.text password:self.txtPassword.text responseBlock:^(NSDictionary *userDetails, NSError *err) {
             
-            NSLog(@"userDetails : %@",userDetails);
-            NSLog(@"err : %@",err);
+            //Hide indicator
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            
             if (err) {
                 
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Failed!"
+                                                                                         message:@"Authorazation failed. Please try again."
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                [alertController addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:nil]];
+                [self presentViewController:alertController animated:YES completion:nil];
                 return;
             }
             
             [self performSegueWithIdentifier:@"ListView" sender:self];
             
         }];
+    }else{
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Input Error!"
+                                                                                 message:@"Please provide both username and password."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

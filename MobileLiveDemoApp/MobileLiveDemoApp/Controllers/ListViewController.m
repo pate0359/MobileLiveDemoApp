@@ -32,17 +32,27 @@
     
     //Get photolist for user
     [self getPhotoList];
-    
 }
-
-
 
 #pragma mark - Private methods
 -(void)getPhotoList{
     
+    //Show network indicator on statusbar
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
     [[MLNetworkService sharedInstance] getListOfPhotos:^(NSDictionary *response, NSError *err) {
         
+        //Hide indicator
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
         if (err) {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Failed!"
+                                                                                     message:@"Unable to get photo list. Plase try again."
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
             return;
         }
         self.photoList = response;
@@ -95,7 +105,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
 

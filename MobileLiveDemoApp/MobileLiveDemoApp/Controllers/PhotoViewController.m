@@ -59,12 +59,26 @@
         return;
     }
     
+    //Show network indicator on statusbar
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
     NSString *photoId = _photoDict[@"id"];
     [[MLNetworkService sharedInstance] getPhotoWithId:photoId responseBlock:^(NSDictionary *photo, NSError *err) {
+    
+        //Hide indicator
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
-        NSLog(@"==================================");
-        NSLog(@"photo : %@",photo);
-        NSLog(@"err : %@",err);
+        if (err) {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Failed!"
+                                                                                     message:@"Unable to get photo. Plase try again."
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+        }
+        //NSLog(@"photo : %@",photo);
     }];
 }
 
@@ -77,7 +91,13 @@
     NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
     NSString *imageName = [NSString stringWithFormat:@"%d",(int)timeStamp];
     
+    //Show network indicator on statusbar
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
     [[MLNetworkService sharedInstance] uploadPhoto:self.imgViewPhoto.image withName:imageName responseBlock:^(BOOL isSuccess, NSError *err) {
+    
+        //Hide indicator
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (err) {
             
@@ -101,9 +121,6 @@
             [self presentViewController:alertController animated:YES completion:nil];
 
         }
-        
-        NSLog(@"isSuccess : %d",isSuccess);
-        NSLog(@"err : %@",err);
     }];
 }
 

@@ -40,8 +40,17 @@
     
     if ([self.txtUsername.text isEqualToString:@""] || [self.txtPassword.text isEqualToString:@""] || [self.txtFirstname.text isEqualToString:@""] || [self.txtLastname.text isEqualToString:@""] || [self.txtPhone.text isEqualToString:@""]) {
         
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Input Error!"
+                                                                                 message:@"All fields are required."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
         return;
     }
+    
+    //Show network indicator on statusbar
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSDictionary *params = @{@"username": self.txtUsername.text,
                              @"password": self.txtPassword.text,
@@ -52,15 +61,30 @@
     
     [[MLNetworkService sharedInstance] registerUser:params responseBlock:^(NSDictionary *userDetails, NSError *err) {
         
-        NSLog(@"userDetails : %@",userDetails);
-        NSLog(@"err : %@",err);
+        //Hide indicator
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (err) {
             
-            return;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Failed!"
+                                                                                     message:@"Unable to register user. Please try again."
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:nil]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }else{
+         
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Success!"
+                                                                                     message:@"User register successfully!"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                  [self.navigationController popViewControllerAnimated:YES];
+                                                              }]];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
-        
-        
     }];
 }
 
