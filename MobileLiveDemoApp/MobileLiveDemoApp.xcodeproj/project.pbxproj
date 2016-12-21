@@ -8,9 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0DF081627C28FA5F9F87FFD9 /* libPods-MobileLiveDemoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED51AF999C1DA81708872AD2 /* libPods-MobileLiveDemoAppTests.a */; };
+		106022B11E0A045900694AF7 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022A81E0A045900694AF7 /* ListViewController.m */; };
+		106022B21E0A045900694AF7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022AA1E0A045900694AF7 /* LoginViewController.m */; };
+		106022B31E0A045900694AF7 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022AC1E0A045900694AF7 /* PhotoViewController.m */; };
+		106022B41E0A045900694AF7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022AE1E0A045900694AF7 /* RegisterViewController.m */; };
+		106022B51E0A045900694AF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022B01E0A045900694AF7 /* ViewController.m */; };
+		106022B71E0A072400694AF7 /* DeveloperInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 106022B61E0A072400694AF7 /* DeveloperInfo.plist */; };
 		10BC17C91E0973E5008DF7A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BC17C81E0973E5008DF7A6 /* main.m */; };
 		10BC17CC1E0973E5008DF7A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BC17CB1E0973E5008DF7A6 /* AppDelegate.m */; };
-		10BC17CF1E0973E5008DF7A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BC17CE1E0973E5008DF7A6 /* ViewController.m */; };
 		10BC17D21E0973E5008DF7A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BC17D01E0973E5008DF7A6 /* Main.storyboard */; };
 		10BC17D41E0973E6008DF7A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10BC17D31E0973E6008DF7A6 /* Assets.xcassets */; };
 		10BC17D71E0973E6008DF7A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BC17D51E0973E6008DF7A6 /* LaunchScreen.storyboard */; };
@@ -48,14 +53,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		106022A71E0A045900694AF7 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		106022A81E0A045900694AF7 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		106022A91E0A045900694AF7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		106022AA1E0A045900694AF7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		106022AB1E0A045900694AF7 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		106022AC1E0A045900694AF7 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		106022AD1E0A045900694AF7 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		106022AE1E0A045900694AF7 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		106022AF1E0A045900694AF7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		106022B01E0A045900694AF7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		106022B61E0A072400694AF7 /* DeveloperInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeveloperInfo.plist; sourceTree = "<group>"; };
 		108272A31E099F2F006BCA00 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
 		108272A51E099F53006BCA00 /* libPods-MobileLiveDemoAppTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MobileLiveDemoAppTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-MobileLiveDemoAppTests.a"; sourceTree = "<group>"; };
 		10BC17C41E0973E5008DF7A6 /* MobileLiveDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileLiveDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10BC17C81E0973E5008DF7A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		10BC17CA1E0973E5008DF7A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		10BC17CB1E0973E5008DF7A6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		10BC17CD1E0973E5008DF7A6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		10BC17CE1E0973E5008DF7A6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		10BC17D11E0973E5008DF7A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10BC17D31E0973E6008DF7A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10BC17D61E0973E6008DF7A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -132,6 +146,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		106022A61E0A045900694AF7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				106022A71E0A045900694AF7 /* ListViewController.h */,
+				106022A81E0A045900694AF7 /* ListViewController.m */,
+				106022A91E0A045900694AF7 /* LoginViewController.h */,
+				106022AA1E0A045900694AF7 /* LoginViewController.m */,
+				106022AB1E0A045900694AF7 /* PhotoViewController.h */,
+				106022AC1E0A045900694AF7 /* PhotoViewController.m */,
+				106022AD1E0A045900694AF7 /* RegisterViewController.h */,
+				106022AE1E0A045900694AF7 /* RegisterViewController.m */,
+				106022AF1E0A045900694AF7 /* ViewController.h */,
+				106022B01E0A045900694AF7 /* ViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		10BC17BB1E0973E5008DF7A6 = {
 			isa = PBXGroup;
 			children = (
@@ -158,14 +189,14 @@
 				10FA2F531E09AF3C006085A7 /* AFNetworking */,
 				10BC17CA1E0973E5008DF7A6 /* AppDelegate.h */,
 				10BC17CB1E0973E5008DF7A6 /* AppDelegate.m */,
-				10BC17CD1E0973E5008DF7A6 /* ViewController.h */,
-				10BC17CE1E0973E5008DF7A6 /* ViewController.m */,
+				106022A61E0A045900694AF7 /* Controllers */,
 				10BC17EF1E09812D008DF7A6 /* NetworkService */,
 				10BC17D01E0973E5008DF7A6 /* Main.storyboard */,
 				10BC17D31E0973E6008DF7A6 /* Assets.xcassets */,
 				10BC17D51E0973E6008DF7A6 /* LaunchScreen.storyboard */,
 				10BC17D81E0973E6008DF7A6 /* Info.plist */,
 				10BC17C71E0973E5008DF7A6 /* Supporting Files */,
+				106022B61E0A072400694AF7 /* DeveloperInfo.plist */,
 			);
 			path = MobileLiveDemoApp;
 			sourceTree = "<group>";
@@ -335,11 +366,11 @@
 				TargetAttributes = {
 					10BC17C31E0973E5008DF7A6 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					10BC17DC1E0973E6008DF7A6 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 10BC17C31E0973E5008DF7A6;
 					};
 				};
@@ -369,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10BC17D71E0973E6008DF7A6 /* LaunchScreen.storyboard in Resources */,
+				106022B71E0A072400694AF7 /* DeveloperInfo.plist in Resources */,
 				10FA2F8B1E09C20F006085A7 /* test.jpg in Resources */,
 				10BC17D41E0973E6008DF7A6 /* Assets.xcassets in Resources */,
 				10FA2F7F1E09AF3C006085A7 /* LICENSE in Resources */,
@@ -486,18 +518,22 @@
 				10FA2F7B1E09AF3C006085A7 /* AFSecurityPolicy.m in Sources */,
 				10FA2F861E09AF3C006085A7 /* UIImageView+AFNetworking.m in Sources */,
 				10FA2F7D1E09AF3C006085A7 /* AFURLResponseSerialization.m in Sources */,
-				10BC17CF1E0973E5008DF7A6 /* ViewController.m in Sources */,
 				10FA2F871E09AF3C006085A7 /* UIProgressView+AFNetworking.m in Sources */,
 				10FA2F821E09AF3C006085A7 /* AFImageDownloader.m in Sources */,
 				10FA2F811E09AF3C006085A7 /* AFAutoPurgingImageCache.m in Sources */,
 				10BC17F21E09812D008DF7A6 /* MLNetworkService.m in Sources */,
 				10FA2F851E09AF3C006085A7 /* UIButton+AFNetworking.m in Sources */,
 				10FA2F841E09AF3C006085A7 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				106022B31E0A045900694AF7 /* PhotoViewController.m in Sources */,
 				10FA2F791E09AF3C006085A7 /* AFHTTPSessionManager.m in Sources */,
+				106022B41E0A045900694AF7 /* RegisterViewController.m in Sources */,
+				106022B11E0A045900694AF7 /* ListViewController.m in Sources */,
+				106022B21E0A045900694AF7 /* LoginViewController.m in Sources */,
 				10FA2F881E09AF3C006085A7 /* UIRefreshControl+AFNetworking.m in Sources */,
 				10FA2F891E09AF3C006085A7 /* UIWebView+AFNetworking.m in Sources */,
 				10FA2F7E1E09AF3C006085A7 /* AFURLSessionManager.m in Sources */,
 				10BC17CC1E0973E5008DF7A6 /* AppDelegate.m in Sources */,
+				106022B51E0A045900694AF7 /* ViewController.m in Sources */,
 				10FA2F7A1E09AF3C006085A7 /* AFNetworkReachabilityManager.m in Sources */,
 				10BC17C91E0973E5008DF7A6 /* main.m in Sources */,
 				10FA2F801E09AF3C006085A7 /* README.md in Sources */,
@@ -651,6 +687,7 @@
 			baseConfigurationReference = C8BBAEC010600DCCEDE42577 /* Pods-MobileLiveDemoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MobileLiveDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -668,6 +705,7 @@
 			baseConfigurationReference = 29018DFAEFEDD643A3207E71 /* Pods-MobileLiveDemoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MobileLiveDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -685,8 +723,10 @@
 			baseConfigurationReference = A2236527DD2466265092D89D /* Pods-MobileLiveDemoAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MobileLiveDemoAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.patel.nignesh2108-gmail.com.MobileLiveDemoAppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MobileLiveDemoApp.app/MobileLiveDemoApp";
@@ -698,6 +738,7 @@
 			baseConfigurationReference = E3D54855F3B0FEBEFC5EAC9C /* Pods-MobileLiveDemoAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MobileLiveDemoAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.patel.nignesh2108-gmail.com.MobileLiveDemoAppTests";
