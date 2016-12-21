@@ -14,6 +14,7 @@
 		106022B41E0A045900694AF7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022AE1E0A045900694AF7 /* RegisterViewController.m */; };
 		106022B51E0A045900694AF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106022B01E0A045900694AF7 /* ViewController.m */; };
 		106022B71E0A072400694AF7 /* DeveloperInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 106022B61E0A072400694AF7 /* DeveloperInfo.plist */; };
+		106022BA1E0A4F5900694AF7 /* Screen Shot 2016-12-21 at 12.48.14 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 106022B91E0A4F5900694AF7 /* Screen Shot 2016-12-21 at 12.48.14 AM.png */; };
 		10BC17C91E0973E5008DF7A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BC17C81E0973E5008DF7A6 /* main.m */; };
 		10BC17CC1E0973E5008DF7A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BC17CB1E0973E5008DF7A6 /* AppDelegate.m */; };
 		10BC17D21E0973E5008DF7A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BC17D01E0973E5008DF7A6 /* Main.storyboard */; };
@@ -64,6 +65,7 @@
 		106022AF1E0A045900694AF7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		106022B01E0A045900694AF7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		106022B61E0A072400694AF7 /* DeveloperInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeveloperInfo.plist; sourceTree = "<group>"; };
+		106022B91E0A4F5900694AF7 /* Screen Shot 2016-12-21 at 12.48.14 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2016-12-21 at 12.48.14 AM.png"; sourceTree = "<group>"; };
 		108272A31E099F2F006BCA00 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
 		108272A51E099F53006BCA00 /* libPods-MobileLiveDemoAppTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MobileLiveDemoAppTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-MobileLiveDemoAppTests.a"; sourceTree = "<group>"; };
 		10BC17C41E0973E5008DF7A6 /* MobileLiveDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileLiveDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				10FA2F8A1E09C20F006085A7 /* test.jpg */,
+				106022B91E0A4F5900694AF7 /* Screen Shot 2016-12-21 at 12.48.14 AM.png */,
 				10BC17F01E09812D008DF7A6 /* MLNetworkService.h */,
 				10BC17F11E09812D008DF7A6 /* MLNetworkService.m */,
 			);
@@ -405,6 +408,7 @@
 				10BC17D41E0973E6008DF7A6 /* Assets.xcassets in Resources */,
 				10FA2F7F1E09AF3C006085A7 /* LICENSE in Resources */,
 				10BC17D21E0973E5008DF7A6 /* Main.storyboard in Resources */,
+				106022BA1E0A4F5900694AF7 /* Screen Shot 2016-12-21 at 12.48.14 AM.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
